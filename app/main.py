@@ -34,8 +34,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Подключаем папку со статикой
-app.mount("/static", StaticFiles(directory="app/static", html=True), name="static")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # путь к папке app/
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static"), html=True), name="static")
 
 # Отдаём index.html для корня (для SPA)
 @app.get("/")
